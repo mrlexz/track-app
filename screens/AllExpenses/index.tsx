@@ -1,9 +1,11 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+// import {StyleSheet} from 'react-native';
 import Expenses from '../../components/Expenses';
+import {useExpenses} from '../../stores/ExpensesContext';
 
 const AllExpenses = () => {
-  return <Expenses expensesPeriod="All Expenses" />;
+  const {expenses} = useExpenses();
+  return <Expenses expenses={expenses} expensesPeriod="All Expenses" />;
 };
 
 export default AllExpenses;

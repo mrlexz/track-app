@@ -1,9 +1,14 @@
 import React from 'react';
 // import {StyleSheet} from 'react-native';
 import Navigation from './navigation';
+import ExpensesProvider from './stores/ExpensesContext';
 
 function App(): JSX.Element {
-  return <Navigation />;
+  return (
+    <ExpensesProvider>
+      <Navigation />
+    </ExpensesProvider>
+  );
 }
 
 // const styles = StyleSheet.create({

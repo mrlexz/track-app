@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 8,
     alignItems: 'center',
+    marginBottom: 16,
   },
   periodText: {
     fontSize: 12,

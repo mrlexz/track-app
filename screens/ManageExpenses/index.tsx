@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {ManageExpensesScreenProp} from '../../navigation/types';
 import CustomButton from '../../components/Expenses/Button';
 import {GlobalStyles} from '../../constants/styles';
+import ExpensesForm from '../../components/ManagementExpenses/ExpensesForm';
 
 const ManageExpenses: FC<ManageExpensesScreenProp> = ({route, navigation}) => {
   const {expenseId} = route.params;
@@ -19,6 +20,7 @@ const ManageExpenses: FC<ManageExpensesScreenProp> = ({route, navigation}) => {
   };
   return (
     <View style={styles.container}>
+      <ExpensesForm />
       <View style={styles.buttons}>
         <CustomButton title="Cancel" mode="flat" onPress={handleCancel} />
         <CustomButton

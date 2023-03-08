@@ -4,9 +4,12 @@ import {ManageExpensesScreenProp} from '../../navigation/types';
 import CustomButton from '../../components/Expenses/Button';
 import {GlobalStyles} from '../../constants/styles';
 import ExpensesForm from '../../components/ManagementExpenses/ExpensesForm';
+import {useExpenses} from '../../stores/ExpensesContext';
+import {Data} from '../../components/Expenses';
 
 const ManageExpenses: FC<ManageExpensesScreenProp> = ({route, navigation}) => {
   const {expenseId} = route.params;
+  const {updateExpense, addExpense, expenses} = useExpenses();
   useLayoutEffect(() => {
     navigation.setOptions({
       title: expenseId ? 'Edit Expense' : 'Add Expense',
@@ -15,19 +18,24 @@ const ManageExpenses: FC<ManageExpensesScreenProp> = ({route, navigation}) => {
   const handleCancel = () => {
     navigation.goBack();
   };
-  const handleConfirm = () => {
+  const handleConfirm = (data: Data) => {
+    if (expenseId) {
+      updateExpense(data);
+    } else {
+      addExpense(data);
+    }
     navigation.goBack();
   };
+
+  const selectedExpenses = expenses.find(ex => ex.id === expenseId);
   return (
     <View style={styles.container}>
-      <ExpensesForm />
-      <View style={styles.buttons}>
-        <CustomButton title="Cancel" mode="flat" onPress={handleCancel} />
-        <CustomButton
-          title={expenseId ? 'Update' : 'Add'}
-          onPress={handleConfirm}
-        />
-      </View>
+      <ExpensesForm
+        expenseId={expenseId}
+        handleCancel={handleCancel}
+        handleConfirm={handleConfirm}
+        selectedExpenses={selectedExpenses}
+      />
       {expenseId && (
         <View style={styles.deleteContainer}>
           <CustomButton
